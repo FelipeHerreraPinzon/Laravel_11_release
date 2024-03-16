@@ -11,8 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->validateCsrfTokens(except: [
+        'http://127.0.0.1:8000/posts',
+        'http://127.0.0.1:8000/posts/*',
+      
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        'http://127.0.0.1:8000/post';
+        //
     })->create();
